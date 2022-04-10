@@ -13,15 +13,6 @@ module Api
         render json: {status: 'SUCCESS', message:'Profile loaded', data: profile}, status: :ok
       end
 
-      # GET /profiles/new
-      # def new
-      #   @profile = Profile.new
-      # end
-
-      # GET /profiles/1/edit
-      # def edit
-      # end
-
       # POST /profiles or /profiles.json
       def create
         profile = Profile.new(profile_params)
@@ -52,12 +43,7 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        # def set_profile
-        #   @profile = Profile.find(params[:id])
-        # end
 
-        # Only allow a list of trusted parameters through.
         def profile_params
           params.require(:profile).permit(:team, :interest, :user_id)
         end

@@ -13,15 +13,6 @@ module Api
         render json: {status: 'SUCCESS', message: 'User loaded', data: user}, status: :ok
       end
 
-      # GET /users/new
-      # def new
-      #   @user = User.new
-      # end
-
-      # GET /users/1/edit
-      # def edit
-      # end
-
       # POST /users or /users.json
       def create
         user = User.new(user_params)
@@ -54,12 +45,7 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        # def set_user
-        #   @user = User.find(params[:id])
-        # end
-
-        # Only allow a list of trusted parameters through.
+      
         def user_params
           params.require(:user).permit(:name)
         end
