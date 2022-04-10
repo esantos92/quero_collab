@@ -28,9 +28,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
+# Ignore all caches and credentials
+**/__pycache__/
+**/.ipynb_checkpoints/
+ai/functions/data/*
