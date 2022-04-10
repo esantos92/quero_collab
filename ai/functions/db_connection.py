@@ -1,5 +1,6 @@
 import yaml
 import psycopg2
+import pandas
 
 def db_connect():
     with open("data/credentials.yaml", "r") as stream:
