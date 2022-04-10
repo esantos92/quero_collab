@@ -30,4 +30,5 @@
 
 # Ignore all caches and credentials
 **/__pycache__/
-ai/data/*
+**/.ipynb_checkpoints/
+ai/functions/data/*

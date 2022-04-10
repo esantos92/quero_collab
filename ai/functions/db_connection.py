@@ -32,14 +32,11 @@ def db_consume(conn, query):
         print(error)
     
     
-    
-def db_insert(conn, values):    
+def db_insert(conn, sql, values):    
     try:
         cursor = conn.cursor()
-        sql = "INSERT INTO quero_collab.results ({TODO}) VALUES(%s)"
         cursor.executemany(sql, values)
         conn.commit()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    
