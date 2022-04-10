@@ -1,4 +1,4 @@
-module Collab_api
+module Api
   module V1
     class PostsController < ApplicationController
       # GET /posts or /posts.json
