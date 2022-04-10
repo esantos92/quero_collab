@@ -16,8 +16,7 @@ def db_connect():
         port=credentials['port']
     )
 
-    cursor = conn.cursor()
-    return cursor
+    return conn
 
 def db_consume(conn, query):
     
