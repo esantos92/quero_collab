@@ -3,13 +3,13 @@ module Api
     class PostsController < ApplicationController
       # GET /posts or /posts.json
       def index
-        posts = Posts.where.(id: params[:id]).order(:created_at)
+        posts = Post.order(:created_at)
         render json: {status: 'SUCCESS', message:'Posts loaded', data: posts}, status: :ok 
       end
 
       # GET /posts/1 or /posts/1.json
       def show
-        post = Posts.find(params[:id])
+        post = Post.find(params[:id])
         render json: {status: 'SUCCESS', message:'Post loaded', data: post}, status: :ok
       end
 
