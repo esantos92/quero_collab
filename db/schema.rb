@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2022_04_09_224051) do
 
   create_table "posts", force: :cascade do |t|
     t.string "text"
-    t.string "keyword"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
