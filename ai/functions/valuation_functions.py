@@ -1,6 +1,7 @@
 from db_connection import *
 import datetime
 import pandas
+from similarity import *
 
 def get_ranked_posts_from_tokens(user_id, tokens):
     #TODO
@@ -19,11 +20,14 @@ def metrics_per_posts(user_id):
     
     postsDF = pandas.DataFrame(response, columns=['post_id', 'author_id', 'text_data', 'created_at'])
     
-    tokens = get_tokens_from_posts(user_id, postsDF)    
-    metricsDF = get_ranked_posts_from_tokens(user_id, tokens)
+    #tokens = get_tokens_from_posts(user_id, postsDF)  
+
+    model_post = get_model(postsDF['text_data'])
+    metricsDF = get_posts_sims(model_post, postsDF)
+    print(metricsDF)
     
-    sql = """INSERT INTO quero_collab.ranked_posts (author_id, most_ranked, date) VALUES (%s, %s, %s)"""
-    db_insert(conn, sql, metricsDF)   
+    #sql = """INSERT INTO quero_collab.ranked_posts (author_id, most_ranked, date) VALUES (%s, %s, %s)"""
+    #db_insert(conn, sql, metricsDF)   
         
     conn.close()
     
@@ -36,12 +40,17 @@ def metrics_per_interests(user_id):
                         from quero_collab.authors 
                             left join quero_collab.profiles on (authors.profile_id = profiles.profile_id)
                         where
-                            author_id = {user_id};"""
+                            author_id != {user_id};"""
     
-    tokens = db_consume(conn, query_interests)[0][0]
-    metricsDF = get_ranked_posts_from_tokens(user_id, tokens)
+    profiles_df = db_consume(conn, query_interests)
+    metricsDF = get_ranked_posts_from_tokens(user_id, profiles_df)
+    print(metricsDF)
     
-    sql = """INSERT INTO quero_collab.ranked_posts (author_id, most_ranked, date) VALUES (%s, %s, %s)"""
-    db_insert(conn, sql, metricsDF)   
+    #sql = """INSERT INTO quero_collab.ranked_posts (author_id, most_ranked, date) VALUES (%s, %s, %s)"""
+    #db_insert(conn, sql, metricsDF)   
         
     conn.close()
+
+
+
+
